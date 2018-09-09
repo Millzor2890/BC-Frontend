@@ -1,0 +1,18 @@
+<p>
+  booksearch works!
+</p>
+
+<div>
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-group">
+        <input type="text"  placeholder="search for a book.." (keyup)="search($event)" >
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="booksData">
+  <p>{{booksData}}</p>
+
+</div>
