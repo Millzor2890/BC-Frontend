@@ -6,14 +6,35 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { BooksearchComponent } from './booksearch/booksearch.component';
 
+import { RouterModule } from '@angular/router';
+import { rootRouterConfig } from './app.routes';
+
+
+//auth
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { LoginComponentComponent } from './login-component/login-component.component';
+import { HomeComponentComponent } from './home-component/home-component.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    BooksearchComponent
+    BooksearchComponent,
+    LoginComponentComponent,
+    HomeComponentComponent
   ],
   imports: [
     BrowserModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ReactiveFormsModule,
+    RouterModule.forRoot(rootRouterConfig),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [],
   bootstrap: [AppComponent]
