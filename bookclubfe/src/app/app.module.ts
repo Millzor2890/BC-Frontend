@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     BooksearchComponent,
     LoginComponentComponent,
-    HomeComponentComponent
+    HomeComponentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
