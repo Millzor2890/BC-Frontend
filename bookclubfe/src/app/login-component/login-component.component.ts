@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { AuthService } from '../services/security/auth.service'
+import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,14 +8,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './login-component.component.html',
   styleUrls: ['./login-component.component.css']
 })
-export class LoginComponentComponent implements OnInit {
+export class LoginComponentComponent {
 
   loginForm: FormGroup;
   errorMessage: string = '';
 
   constructor(
-    //public authService: AuthService,
-    //private router: Router,
+    public authService: AuthService,
+    private router: Router,
     private fb: FormBuilder
   ) {
     this.createForm();
@@ -28,6 +29,16 @@ export class LoginComponentComponent implements OnInit {
       email: ['', Validators.required ],
       password: ['',Validators.required]
     });
+  }
+
+  tryLogin(value){
+    this.authService.doLogin(value)
+    .then(res => {
+      this.router.navigate(['/user']);
+    }, err => {
+      console.log(err);
+      this.errorMessage = err.message;
+    })
   }
 
 }
