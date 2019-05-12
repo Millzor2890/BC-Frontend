@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
             return reject(false);
             }
         })
-        }
+      })
   }
 
 
@@ -44,11 +44,6 @@ export class AuthGuard implements CanActivate {
     })
   }
 
-
-  goAway(navURL): {
-
-    console.log(this.router);
-  }
 
   
 }
