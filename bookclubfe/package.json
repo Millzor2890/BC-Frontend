@@ -28,6 +28,7 @@
     "firebase": "^5.5.2",
     "rxjs": "6.1.0",
     "rxjs-compat": "^6.0.0-rc.0",
+    "tar": ">=4.4.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
