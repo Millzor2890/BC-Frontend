@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/security/auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-login-component',
@@ -12,6 +13,7 @@ export class LoginComponentComponent {
 
   loginForm: FormGroup;
   errorMessage: string = '';
+  messageSentMessage: string = '';
 
   constructor(
     public authService: AuthService,
@@ -40,5 +42,23 @@ export class LoginComponentComponent {
       this.errorMessage = err.message;
     })
   }
+
+  resetPassword(value){
+    this.authService.doPasswordReset(value)
+    .then(res => {
+      this.messageSentMessage = "Password Reset Email sent successfully!";
+    }, err => {
+      if(err.message === "There is no user record corresponding to this identifier. The user may have been deleted.")
+      {
+        this.messageSentMessage = "It looks like this email address is not regestered.  Try Creating an account!";
+
+      }
+      else{
+        this.messageSentMessage = err.message;
+
+      }
+    })
+  }
+
 
 }
