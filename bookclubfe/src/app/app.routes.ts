@@ -5,7 +5,7 @@ import { Routes } from '@angular/router';
 //import { RegisterComponent } from './register/register.component';
 //import { UserResolver } from './user/user.resolver';
 //import { AuthGuard } from './core/auth.guard';
-import { BooksearchComponent } from '../app/booksearch/booksearch.component';
+import { BooksearchComponent } from './booksearch/booksearch.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import {RegisterComponent} from './register/register.component';

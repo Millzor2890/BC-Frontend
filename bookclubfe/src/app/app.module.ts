@@ -8,7 +8,7 @@ import { BooksearchComponent } from './booksearch/booksearch.component';
 
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
-import {firebase_config} from '../environments/firebase.config'
+import {firebase_config} from '../configs/firebase.config'
 
 
 //auth
