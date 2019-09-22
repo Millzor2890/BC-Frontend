@@ -4,12 +4,19 @@
 <div>
   <div class="row">
     <div class="col-md-12">
-        <input type="text"  placeholder="search for a book.." (keyup)="search($event)" >
+        <input type="text"  placeholder="search for a book.." (keyup)="updateSearchQuery($event)" >
     </div>
   </div>
 </div>
 
 <div *ngIf="booksData">
   <p>{{booksData}}</p>
+
+</div>
+<button  (click)="searchForBooks()" class="btn btn-default">Search</button>
+
+<div *ngIf="bookResults">
+  <h2>Book Results:</h2>
+  <p>{{bookResults}}</p>
 
 </div>

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { HttpClientModule } from '@angular/common/http'; 
 import { environment } from '../environments/environment';
 import { BooksearchComponent } from './booksearch/booksearch.component';
 
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 
 import { AuthService } from './services/security/auth.service';
+import { BooksearchService } from './services/booksearch/booksearch.service';
 import {AuthGuard} from './services/security/auth.guard';
 
 
@@ -35,6 +37,7 @@ import {AuthGuard} from './services/security/auth.guard';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
@@ -42,7 +45,7 @@ import {AuthGuard} from './services/security/auth.guard';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService,BooksearchService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
