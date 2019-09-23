@@ -36,7 +36,7 @@ export class BooksearchComponent implements OnInit {
   searchForBooks(){
     this.booksearchService.search(this.booksData).subscribe(
       (data:any) => {
-        this.bookResults =   JSON.stringify(Array.of(data)[0].items[0]);
+        this.bookResults =   Array.of(data)[0].items;
       },
       error => 
       {

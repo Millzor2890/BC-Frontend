@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {firebase_config} from '../../../configs/firebase.config';
 
-
-
 @Injectable()
 export class BooksearchService {
 
@@ -20,6 +18,8 @@ export class BooksearchService {
   {
     var return_data = "api did not work";
 
+    searchstring = searchstring.replace(' ', '+');
+
     var params: HttpParams =  new HttpParams()
     .set('q', searchstring)
     .set('key', firebase_config.firebase.apiKey)
@@ -27,8 +27,6 @@ export class BooksearchService {
 
 
     return this.http.get(this.apiUrl, {params});
-    
+  
   }
-
-
 }
