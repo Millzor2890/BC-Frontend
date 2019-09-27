@@ -13,18 +13,26 @@
   <p>{{booksData}}</p>
 
 </div>
+
+
 <button  (click)="searchForBooks()" class="btn btn-default">Search</button>
 
 <div *ngIf="bookResults">
   <h2>Book Results:</h2>
   <ul>
-      <li *ngFor="let book of bookResults; let i = index">
+      <li *ngFor="let book of bookResults; let i = index;">
         {{i}} 
-        <h3>Title: {{book.volumeInfo.title}}</h3>
-        <h3>Author: {{book.volumeInfo.authors[0]}}</h3>
-        <h3>ID: {{book.id}}</h3>
-        <img [src]="book.volumeInfo.imageLinks.smallThumbnail"/>
-        <a class="button is-primary">Save to bookshelf</a>
+        <h3>Title: {{book.bookData.volumeInfo.title}}</h3>
+        <h3>Author: {{book.bookData.volumeInfo.authors[0]}}</h3>
+        <h3>ID: {{book.bookData.id}}</h3>
+        <img [src]="book.bookData.volumeInfo.imageLinks.smallThumbnail"/>
+        <a (click)="saveToBookshelf($event, book)" class="button is-primary">Save to bookshelf</a>
+        <div>
+            <h3>TransactionStatus : </h3>
+            <p>{{book.transactionStatus}}</p>
+          
+          </div>
+        
       </li>
     </ul>
 
