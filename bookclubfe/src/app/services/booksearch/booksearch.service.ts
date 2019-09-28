@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {firebase_config} from '../../../configs/firebase.config';
 
+
 @Injectable()
 export class BooksearchService {
 
   private apiUrl;
+
+  
 
   constructor(private http: HttpClient)
   {
@@ -24,6 +27,7 @@ export class BooksearchService {
     .set('q', searchstring)
     .set('key', firebase_config.firebase.apiKey)
     .set('maxResults', '10')
+
 
 
     return this.http.get(this.apiUrl, {params});

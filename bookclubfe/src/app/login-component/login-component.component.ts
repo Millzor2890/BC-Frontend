@@ -50,7 +50,7 @@ export class LoginComponentComponent {
     }, err => {
       if(err.message === "There is no user record corresponding to this identifier. The user may have been deleted.")
       {
-        this.messageSentMessage = "It looks like this email address is not regestered.  Try Creating an account!";
+        this.messageSentMessage = "It looks like this email address is not registered.  Try Creating an account!";
 
       }
       else{
@@ -59,6 +59,8 @@ export class LoginComponentComponent {
       }
     })
   }
+
+
 
 
 }

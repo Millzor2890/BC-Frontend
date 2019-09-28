@@ -74,7 +74,7 @@ saveToBookshelf(event: any,book: any)
       database.collection("Bookshelves").add({
         userId: firebase.auth().currentUser.uid,
         books:{
-          [book.bookData.id] : {
+          0:{
               id:book.bookData.id,
               shelfOrder:1
         }
@@ -96,8 +96,6 @@ saveToBookshelf(event: any,book: any)
 
         //DoNothing
       })
-
-      
     }
     else if(querySnapshot.size == 1)
     {
@@ -107,23 +105,21 @@ saveToBookshelf(event: any,book: any)
     
         console.log(data);
         console.log("Total number of books on the shelf is: " + Object.keys(data.books).length);
-        var new_data =data.child("books").add(
-          {
-            [book.bookData.id] : 
+        querySnapshot.docs[0].ref.update({
+          books: firebase.firestore.FieldValue.arrayUnion({
+            [Object.keys(data.books).length]: 
             {
                 id:book.bookData.id,
-                shelfOrder:1
+                shelfOrder:Object.keys(data.books).length,
+           
             }
-          })
-          data.ref.set(new_data);
-    
-
+        })
+    });
     }
-
-        
-          
-        
       
+      
+
+
       //var docToUpdate = querySnapshot[0].set()
       //d
   

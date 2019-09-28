@@ -18,12 +18,12 @@ export class AuthGuard implements CanActivate {
     return new Promise<any>((resolve, reject) => {
         var user = firebase.auth().onAuthStateChanged(function(user){
             if (user) {
-                console.log(user);
+                //console.log(user);
                 console.log('user is logged in');
             return resolve(true);
             } else {
                 console.log('user is not logged in');
-                console.log(this.router)
+                //console.log(this.router)
 
             return reject(false);
             }
