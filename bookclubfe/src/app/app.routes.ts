@@ -6,6 +6,7 @@ import { Routes } from '@angular/router';
 //import { UserResolver } from './user/user.resolver';
 //import { AuthGuard } from './core/auth.guard';
 import { BooksearchComponent } from './booksearch/booksearch.component';
+import { BookshelfComponent } from './bookshelf/bookshelf.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import {RegisterComponent} from './register/register.component';
@@ -15,6 +16,7 @@ import { AuthGuard } from './services/security/auth.guard';
 export const rootRouterConfig: Routes = [
     { path: 'home', component: HomeComponentComponent },
     { path: 'booksearch', component: BooksearchComponent, canActivate: [AuthGuard]},
+    { path: 'bookshelf', component: BookshelfComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponentComponent },
     { path: 'register', component: RegisterComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },

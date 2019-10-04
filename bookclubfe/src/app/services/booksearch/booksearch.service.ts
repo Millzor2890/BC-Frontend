@@ -14,6 +14,7 @@ export class BooksearchService {
   {
     this.apiUrl = "https://www.googleapis.com/books/v1/volumes";
 
+
    }
 
 
@@ -27,10 +28,11 @@ export class BooksearchService {
     .set('q', searchstring)
     .set('key', firebase_config.firebase.apiKey)
     .set('maxResults', '10')
-
-
-
     return this.http.get(this.apiUrl, {params});
-  
+  }
+
+
+  searchForBookById(bookId: string){
+    return this.http.get(this.apiUrl + "/" +bookId);
   }
 }

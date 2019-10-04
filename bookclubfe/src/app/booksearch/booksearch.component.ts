@@ -76,7 +76,7 @@ saveToBookshelf(event: any,book: any)
         books:{
           0:{
               id:book.bookData.id,
-              shelfOrder:1
+              shelfOrder:0
         }
       }
         

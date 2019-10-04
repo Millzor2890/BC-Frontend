@@ -14,24 +14,13 @@ export class FirebaseDBService {
   }
 
 
-  dothing(params:string) {
+  getBookShelfForUser(){
+    return this.db.collection("Bookshelves").where( "userId", "==",  firebase.auth().currentUser.uid).get();
+  }
 
-    console.log(firebase.auth().currentUser.email);
-
-    this.db.collection("users").add({
-      first: "Ada",
-      last: "Lovelace",
-      born: 1815
-  }).then(function(docRef) {
-    console.log("Document written with ID: ", docRef.id);
-    console.log(docRef);
-})
-.catch(function(error) {
-    console.log("Error adding document: ", error);
-});
 
 
 
     
-  }
+  
 }
