@@ -7,9 +7,11 @@
   <ul>
       <li *ngFor="let book of booksToShow; let i = index;">
         {{i}} 
-        <h3>Title: {{book.title}}</h3>
-        <h3>Author: {{book.authors[0]}}</h3>
-        <img [src]="book.imageLinks.smallThumbnail"/>
+        <h3>Title: {{book.volumeInfo.title}}</h3>
+        <h3>Author: {{book.volumeInfo.authors[0]}}</h3>
+        <h3>ID: {{book.id}}</h3>
+        <img [src]="book.volumeInfo.imageLinks.smallThumbnail"/>
+        <a (click)="removeFromBookshelf($event, book)" class="button is-danger">Remove</a>
 
         
       </li>

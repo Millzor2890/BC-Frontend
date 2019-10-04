@@ -30,13 +30,23 @@ export class BookshelfComponent implements OnInit {
   async loadBooksOnShelf(){
     //get the shelf record for user
     const dbDocument = await this.firestoreDao.getBookShelfForUser();
+    console.log(dbDocument)
+
     var dataFromDb =dbDocument.docs[0].data();
+    console.log(JSON.stringify(dataFromDb))
+    console.log(dataFromDb["books"].length)
 
     for(var index = 0; index < dataFromDb.books.length; index++)
     {
       this.booksearchService.searchForBookById(dataFromDb.books[index][index].id).toPromise()
-      .then((data) => this.booksToShow.push(data["volumeInfo"]))
+      .then((data) => this.booksToShow.push(data))
       .catch((error) => console.log(error));
-    }
-}
+    }  
+  }
+
+  removeFromBookshelf(event: any,book: any)
+  {
+    this.firestoreDao.removeBookFromShelf(book);
+    this.loadBooksOnShelf();
+  }
 }

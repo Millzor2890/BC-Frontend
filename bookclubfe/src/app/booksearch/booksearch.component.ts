@@ -73,12 +73,12 @@ saveToBookshelf(event: any,book: any)
       console.log("Create new bookshelf for user");
       database.collection("Bookshelves").add({
         userId: firebase.auth().currentUser.uid,
-        books:{
-          0:{
+        books:[{
+          [0]:{
               id:book.bookData.id,
-              shelfOrder:0
+              shelfOrder:[0]
         }
-      }
+      }]
         
       }).then(function(docRef)
       {
