@@ -26,6 +26,7 @@ import { AuthService } from './services/security/auth.service';
 import { BooksearchService } from './services/booksearch/booksearch.service';
 import {AuthGuard} from './services/security/auth.guard';
 import { BookshelfComponent } from './bookshelf/bookshelf.component';
+import { SurveyComponent } from './survey/survey.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { BookshelfComponent } from './bookshelf/bookshelf.component';
     LoginComponentComponent,
     HomeComponentComponent,
     RegisterComponent,
-    BookshelfComponent
+    BookshelfComponent,
+    SurveyComponent
   ],
   imports: [
     BrowserModule,
