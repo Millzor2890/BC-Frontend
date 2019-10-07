@@ -44,6 +44,7 @@ export class FirebaseDBService {
     dbDocument.docs[0].ref.set(data4db);
     //commit to db
   }
+}
 
 
 

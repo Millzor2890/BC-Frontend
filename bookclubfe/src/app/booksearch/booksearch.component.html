@@ -23,9 +23,13 @@
       <li *ngFor="let book of bookResults; let i = index;">
         {{i}} 
         <h3>Title: {{book.bookData.volumeInfo.title}}</h3>
-        <h3>Author: {{book.bookData.volumeInfo.authors[0]}}</h3>
+        <h3>Author(s):</h3>
+        <br/>
+          <div *ngFor="let author of book.bookData.volumeInfo.authors; let j = index;">
+           <li>{{book.bookData.volumeInfo.authors[j]}}</li>>
+          </div>
         <h3>ID: {{book.bookData.id}}</h3>
-        <img [src]="book.bookData.volumeInfo.imageLinks.smallThumbnail"/>
+        <img [src]="book.bookData.volumeInfo?.imageLinks?.smallThumbnail" alt="no image"/>
         <a (click)="saveToBookshelf($event, book)" class="button is-primary">Save to bookshelf</a>
         <div>
             <h3>TransactionStatus : </h3>
