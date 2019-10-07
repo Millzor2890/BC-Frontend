@@ -44,9 +44,18 @@ export class BookshelfComponent implements OnInit {
     }  
   }
 
+  
+
   removeFromBookshelf(event: any,book: any)
   {
     this.firestoreDao.removeBookFromShelf(book);
-    this.loadBooksOnShelf();
+    //find a way to refresh the page or update view model.
+  }
+
+  promoteToSurvey(event: any,book: any){
+    console.log("trying to add to survey");
+    this.firestoreDao.promoteBookToSurvey(book);
+    console.log("finished adding to survey");
+
   }
 }

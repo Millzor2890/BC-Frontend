@@ -12,6 +12,7 @@
         <h3>ID: {{book.id}}</h3>
         <img [src]="book.volumeInfo.imageLinks.smallThumbnail"/>
         <a (click)="removeFromBookshelf($event, book)" class="button is-danger">Remove</a>
+        <a (click)="promoteToSurvey($event, book)" class="button is-info">Nominate for Next Bookclub</a>
 
         
       </li>
