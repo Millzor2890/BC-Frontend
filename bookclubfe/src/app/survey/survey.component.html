@@ -1,3 +1,20 @@
 <p>
   survey works!
 </p>
+<div *ngIf="booksToShow">
+  <h2>These are the books you can vote for:</h2>
+  <ul>
+      <li *ngFor="let book of booksToShow; let i = index;">
+        {{i}} 
+        <h3>Title: {{book.bookData.volumeInfo.title}}</h3>
+        <h3>Author: {{book.bookData.volumeInfo.authors[0]}}</h3>
+        <h3>ID: {{book.bookData.id}}</h3>
+        <img [src]="book.bookData.volumeInfo.imageLinks.smallThumbnail"/>
+        <h3>Nominating User: {{book.nominatingUser}}</h3>
+
+
+        
+      </li>
+    </ul>
+
+</div>

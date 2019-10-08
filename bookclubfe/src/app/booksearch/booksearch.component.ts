@@ -23,9 +23,6 @@ export class BooksearchComponent implements OnInit {
   ) {
     this.db = firebase.firestore();
     this.query="";
-    
-    
-
    }
 
 
@@ -33,7 +30,6 @@ export class BooksearchComponent implements OnInit {
   }
 
   updateSearchQuery(event: any){
-    console.log("This is the query : " + event.target.value);
     this.booksData = event.target.value
   }
 

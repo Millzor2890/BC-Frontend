@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/security/auth.service';
 import { Router, Params } from '@angular/router';
+import { FirebaseDBService } from '../services/dao/firebase-db.service';
+
 
 @Component({
   selector: 'app-register',
@@ -18,7 +20,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private firestoreDao: FirebaseDBService
+
   ) {
     this.createForm();
    }
@@ -40,6 +44,7 @@ export class RegisterComponent implements OnInit {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
+      this.firestoreDao.addUserToBookclub();
     }, err => {
       console.log(err);
       this.errorMessage = err.message;

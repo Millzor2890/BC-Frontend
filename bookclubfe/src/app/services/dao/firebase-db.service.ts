@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,8 +15,23 @@ export class FirebaseDBService {
   }
 
 
+  addUserToBookclub(){
+    this.db.collection("Surveys").where( "members", "array-contains",  "G5LnNytbXFbIuoRJ071mBP5MA5f1").get()
+    .then((querySnapshot)=> {
+      querySnapshot.docs[0].ref.update({
+        members: firebase.firestore.FieldValue.arrayUnion(
+          firebase.auth().currentUser.uid
+      )
+    })
+  })
+  }
+
   getBookShelfForUser(){
     return this.db.collection("Bookshelves").where( "userId", "==",  firebase.auth().currentUser.uid).get();
+  }
+
+  getSurveyData(){
+    return this.db.collection("Surveys").where( "members", "array-contains",  firebase.auth().currentUser.uid).get();
   }
   //Survery 
   ////Members: [userIds]
@@ -36,37 +52,30 @@ export class FirebaseDBService {
       if(querySnapshot.size == 0)
       {
         console.log("Create new survey for user");
-        var papa =  database.collection("Surveys").add({
+        database.collection("Surveys").add({
           members:[firebase.auth().currentUser.uid],
           memberInfo: [{userId:  firebase.auth().currentUser.uid, hasVoted: false}],
           books:[{
-            [0]:{
                 id:book.id,
-                promotingUser:firebase.auth().currentUser.uid,
+                promotingUser:firebase.auth().currentUser.email,
                 currentScore: 0 
-          }
-        }]
           
-        });
-
+        }]
+        })
     }
     else if(querySnapshot.size == 1)
     {
-      console.log(querySnapshot);
-
       var data = querySnapshot.docs[0].data();
-    
-        console.log(data);
-        console.log("Total number of books on the shelf is: " + Object.keys(data.books).length);
+
         querySnapshot.docs[0].ref.update({
-          books: firebase.firestore.FieldValue.arrayUnion({
-            [Object.keys(data.books).length]: 
+          books: firebase.firestore.FieldValue.arrayUnion(
+             
             {
               id:book.id,
-              promotingUser:firebase.auth().currentUser.uid,
+              promotingUser:firebase.auth().currentUser.email,
               currentScore: 0 
            
-            }
+            
         })
     });
     }

@@ -10,14 +10,12 @@ import * as firebase from 'firebase'
   styleUrls: ['./bookshelf.component.css']
 })
 export class BookshelfComponent implements OnInit {
-  db:firebase.firestore.Firestore;
   public booksToShow: any[];
 
   constructor(
     public booksearchService: BooksearchService,
     public firestoreDao: FirebaseDBService
   ) {
-    this.db = firebase.firestore();
     this.booksToShow = new Array;
 
    }
