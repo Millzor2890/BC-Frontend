@@ -21,7 +21,9 @@ export class RegisterComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    private firestoreDao: FirebaseDBService
+    private firestoreDao: FirebaseDBService,
+
+
 
   ) {
     this.createForm();

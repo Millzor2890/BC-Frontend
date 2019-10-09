@@ -14,6 +14,31 @@ export class FirebaseDBService {
     this.db = firebase.firestore();
   }
 
+  submitVoteBooks(first: any, second: any, third: any)
+  {
+    this.db.collection("Surveys").where( "members", "array-contains",  firebase.auth().currentUser.uid).get()
+    .then((querySnapshot) => {
+      var data = querySnapshot.docs[0].data();
+      console.log(data);
+
+      for(var i = 0; i < data.books.length; i++){
+        console.log(data.books[i])
+        if(data.books[i].id == first.bookData.id){
+          //Do something
+        }
+      }
+
+    }).catch((error)=> console.log(error))
+      
+  }
+
+
+  addVoteToBook(book:any, points: number)
+  {
+
+
+  }
+
 
   addUserToBookclub(){
     this.db.collection("Surveys").where( "members", "array-contains",  "G5LnNytbXFbIuoRJ071mBP5MA5f1").get()
@@ -21,7 +46,13 @@ export class FirebaseDBService {
       querySnapshot.docs[0].ref.update({
         members: firebase.firestore.FieldValue.arrayUnion(
           firebase.auth().currentUser.uid
-      )
+      ),
+        memberInfo: firebase.firestore.FieldValue.arrayUnion(
+          {
+            userId: firebase.auth().currentUser.uid,
+            hasVoted: false
+          }
+        )
     })
   })
   }
@@ -58,7 +89,8 @@ export class FirebaseDBService {
           books:[{
                 id:book.id,
                 promotingUser:firebase.auth().currentUser.email,
-                currentScore: 0 
+                currentScore: 0,
+                votes: []
           
         }]
         })
@@ -73,7 +105,8 @@ export class FirebaseDBService {
             {
               id:book.id,
               promotingUser:firebase.auth().currentUser.email,
-              currentScore: 0 
+              currentScore: 0,
+              votes:[]
            
             
         })

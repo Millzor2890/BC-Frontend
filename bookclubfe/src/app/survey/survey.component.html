@@ -11,10 +11,16 @@
         <h3>ID: {{book.bookData.id}}</h3>
         <img [src]="book.bookData.volumeInfo.imageLinks.smallThumbnail"/>
         <h3>Nominating User: {{book.nominatingUser}}</h3>
-
-
-        
+        <a (click)="selectFirstChoice($event, book)" class="button first-choice is-success">First Choice</a>
+        <a (click)="selectSecondChoice($event, book)" class="button second-choice is-link">Second Choice</a>
+        <a (click)="selectThirdChoice($event, book)" class="button third-choice is-info">Third Choice</a>
       </li>
     </ul>
+
+</div>
+<div>
+  <h1>Submit your vote!</h1>
+  <h3>{{voteSubmitError}}</h3>
+    <a (click)="submitVote($event)" class="button submitVote is-error">Third Choice</a>
 
 </div>
