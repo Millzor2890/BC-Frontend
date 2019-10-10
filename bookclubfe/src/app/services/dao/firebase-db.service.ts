@@ -18,19 +18,51 @@ export class FirebaseDBService {
   {
     this.db.collection("Surveys").where( "members", "array-contains",  firebase.auth().currentUser.uid).get()
     .then((querySnapshot) => {
+      //console.log(querySnapshot)
+      var newBookshelf = new Array;
       var data = querySnapshot.docs[0].data();
+      for(var i = 0; i < data.books.length; i++){
+        if(first.bookData.id != data.books[i].id){
+          newBookshelf.push({
+              currentScore: 0,
+              id: data.books[i].id,
+              promotingUser: data.books[i].promotingUser,
+              votes : data.books[i].votes
+            }
+            
+        )
+          }else{
+            console.log(data.books[i].votes)
+            var newvoteslist = new Array;
+            for(var j = 0; j < data.books[i].votes.length; j++){
+              newvoteslist.push(data.books[i].votes[j])
+            }
+
+            newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 3})
+            newBookshelf.push({
+              currentScore: 0,
+              id: data.books[i].id,
+              promotingUser: data.books[i].promotingUser,
+              votes : newvoteslist
+            }
+            
+            )
+          }
+        }
+        querySnapshot.docs[0].ref.update("books",newBookshelf);
       console.log(data);
 
-      for(var i = 0; i < data.books.length; i++){
-        console.log(data.books[i])
-        if(data.books[i].id == first.bookData.id){
-          //Do something
-        }
-      }
+      // for(var i = 0; i < data.books.length; i++){
+      //   console.log(data.books[i])
+      //   if(data.books[i].id == first.bookData.id){
+      //     //Do something
+      //   }
+    //   }
 
-    }).catch((error)=> console.log(error))
+     }).catch((error)=> console.log(error))
       
-  }
+  
+}
 
 
   addVoteToBook(book:any, points: number)
@@ -92,7 +124,7 @@ export class FirebaseDBService {
                 currentScore: 0,
                 votes: []
           
-        }]
+                  }]
         })
     }
     else if(querySnapshot.size == 1)
