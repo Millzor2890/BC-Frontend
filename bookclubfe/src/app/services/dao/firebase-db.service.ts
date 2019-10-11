@@ -22,42 +22,74 @@ export class FirebaseDBService {
       var newBookshelf = new Array;
       var data = querySnapshot.docs[0].data();
       for(var i = 0; i < data.books.length; i++){
-        if(first.bookData.id != data.books[i].id){
-          newBookshelf.push({
-              currentScore: 0,
-              id: data.books[i].id,
-              promotingUser: data.books[i].promotingUser,
-              votes : data.books[i].votes
-            }
-            
-        )
-          }else{
-            console.log(data.books[i].votes)
-            var newvoteslist = new Array;
-            for(var j = 0; j < data.books[i].votes.length; j++){
-              newvoteslist.push(data.books[i].votes[j])
-            }
+        if(first.bookData.id == data.books[i].id){
+          var newvoteslist = new Array;
+          for(var j = 0; j < data.books[i].votes.length; j++){
+            newvoteslist.push(data.books[i].votes[j])
+          }
 
-            newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 3})
-            newBookshelf.push({
-              currentScore: 0,
-              id: data.books[i].id,
-              promotingUser: data.books[i].promotingUser,
-              votes : newvoteslist
-            }
-            
-            )
+          newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 3000})
+          newBookshelf.push({
+            currentScore: 0,
+            id: data.books[i].id,
+            promotingUser: data.books[i].promotingUser,
+            votes : newvoteslist
+          }
+          
+          )
+        }
+        else if(second.bookData.id == data.books[i].id)
+        {
+          var newvoteslist = new Array;
+          for(var j = 0; j < data.books[i].votes.length; j++){
+            newvoteslist.push(data.books[i].votes[j])
+          }
+
+          newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 2000})
+          newBookshelf.push({
+            currentScore: 0,
+            id: data.books[i].id,
+            promotingUser: data.books[i].promotingUser,
+            votes : newvoteslist
+          }
+          
+          )
+
+        }
+        else if(third.bookData.id == data.books[i].id)
+        {
+          var newvoteslist = new Array;
+          for(var j = 0; j < data.books[i].votes.length; j++){
+            newvoteslist.push(data.books[i].votes[j])
+          }
+
+          newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 1000})
+          newBookshelf.push({
+            currentScore: 0,
+            id: data.books[i].id,
+            promotingUser: data.books[i].promotingUser,
+            votes : newvoteslist
+          }
+          
+          )
+
+        }
+        else{
+          newBookshelf.push({
+            currentScore: 0,
+            id: data.books[i].id,
+            promotingUser: data.books[i].promotingUser,
+            votes : data.books[i].votes
+          })
+
           }
         }
-        querySnapshot.docs[0].ref.update("books",newBookshelf);
+        querySnapshot.docs[0].ref.update("books",newBookshelf); 
+
+        //Need to save that the current user has voted and cannot vote again.
+
       console.log(data);
 
-      // for(var i = 0; i < data.books.length; i++){
-      //   console.log(data.books[i])
-      //   if(data.books[i].id == first.bookData.id){
-      //     //Do something
-      //   }
-    //   }
 
      }).catch((error)=> console.log(error))
       
