@@ -1,11 +1,10 @@
-<p>
-  survey works!
-</p>
+<div *ngIf="book.myMemberInfo.hasVoted">
+  <p>You have already voted.  You cannot vote again in this survey!</p>
+</div>
 <div *ngIf="booksToShow">
   <h2>These are the books you can vote for:</h2>
   <ul>
       <li *ngFor="let book of booksToShow; let i = index;">
-        {{i}} 
         <h3>Title: {{book.bookData.volumeInfo.title}}</h3>
         <h3>Author: {{book.bookData.volumeInfo.authors[0]}}</h3>
         <h3>ID: {{book.bookData.id}}</h3>
@@ -21,6 +20,6 @@
 <div>
   <h1>Submit your vote!</h1>
   <h3>{{voteSubmitError}}</h3>
-    <a (click)="submitVote($event)" class="button submitVote is-error">Third Choice</a>
+    <a (click)="submitVote($event)" class="button submitVote is-error">Submit Vote</a>
 
 </div>

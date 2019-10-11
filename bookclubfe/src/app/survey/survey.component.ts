@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2, ElementRef  } from '@angular/core';
+import {Router} from "@angular/router";
 import { FirebaseDBService } from '../services/dao/firebase-db.service';
 import { BooksearchService } from '../services/booksearch/booksearch.service';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class SurveyComponent implements OnInit {
   constructor(public firestoreDao: FirebaseDBService,
     public booksearchService: BooksearchService,
     private render:Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private router: Router
 
   ) 
   { 
@@ -45,6 +48,7 @@ export class SurveyComponent implements OnInit {
     }
     else{
       this.firestoreDao.submitVoteBooks(this.firstChoiceBook, this.secondChoiceBook, this.thirdChoiceBook)
+      //this.router.navigate(['/home'])
     }
   }
 
@@ -188,9 +192,19 @@ export class SurveyComponent implements OnInit {
   async loadBooksForSurvey(){
     const dbDocument = await this.firestoreDao.getSurveyData();
     var dataFromDb =dbDocument.docs[0].data();
+    var myMemberInfo;
+    console.log(dataFromDb.memberInfo[0].userId);
+    for(var memberIterator = 0; memberIterator < dataFromDb.memberInfo.length; memberIterator++)
+    {
+      if(dataFromDb.memberInfo[memberIterator].userId == firebase.auth().currentUser.uid)
+      {
+        myMemberInfo = dataFromDb.memberInfo[memberIterator];
+      }
+    }
 
     console.log(dataFromDb);
     console.log(dataFromDb.books);
+    
     for(var index = 0; index < dataFromDb.books.length; index++)
     {
       var promotingUser = dataFromDb.books[index].promotingUser;
@@ -199,6 +213,8 @@ export class SurveyComponent implements OnInit {
       this.booksToShow.push({
           "bookData": bookData,
           "nominatingUser": promotingUser,
+          "myMemberInfo" : myMemberInfo,
+          "memberInfo": dataFromDb.memberInfo
       })
     }  
 

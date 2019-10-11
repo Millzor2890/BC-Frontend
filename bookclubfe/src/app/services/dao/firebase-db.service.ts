@@ -84,9 +84,27 @@ export class FirebaseDBService {
 
           }
         }
+        var newMemberInfo = new Array;
+        for(var k = 0; k < data.memberInfo.length; k++){
+          if(data.memberInfo[k].userId == firebase.auth().currentUser.uid)
+          {
+            newMemberInfo.push({
+              hasVoted: true,
+              userId: firebase.auth().currentUser.uid
+            })
+          }
+          else{
+            newMemberInfo.push(data.memberInfo[k])
+          }
+        }
+
+
         querySnapshot.docs[0].ref.update("books",newBookshelf); 
+        querySnapshot.docs[0].ref.update("memberInfo",newMemberInfo); 
 
         //Need to save that the current user has voted and cannot vote again.
+
+
 
       console.log(data);
 
