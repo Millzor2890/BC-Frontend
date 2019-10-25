@@ -132,7 +132,8 @@ export class FirebaseDBService {
         memberInfo: firebase.firestore.FieldValue.arrayUnion(
           {
             userId: firebase.auth().currentUser.uid,
-            hasVoted: false
+            hasVoted: false,
+            email: firebase.auth().currentUser.email
           }
         )
     })
@@ -202,6 +203,28 @@ export class FirebaseDBService {
 
     });
 
+  }
+
+  async removeBookFromSurvey(bookToRemove: any)
+  {
+    console.log(bookToRemove)
+    const dbDocument = await this.getSurveyData();
+    var data = dbDocument.docs[0].data();
+    var newSurveyBookShelf = new Array;
+
+    for(var i =0; i < data.books.length; i++){
+      if(bookToRemove.bookData.id!= data.books[i].id){
+        newSurveyBookShelf.push(data.books[i]);
+      }
+    }
+
+
+    var data4db = {
+      memberInfo: data.memberInfo,
+      books: newSurveyBookShelf,
+      members: data.members
+    }
+    dbDocument.docs[0].ref.set(data4db);
   }
 
   async removeBookFromShelf(book: any){

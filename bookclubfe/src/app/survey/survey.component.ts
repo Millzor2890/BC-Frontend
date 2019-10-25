@@ -16,6 +16,7 @@ export class SurveyComponent implements OnInit {
   private secondChoiceBook: any;
   private thirdChoiceBook: any;
   private voteSubmitError: any;
+  private myMemberInfo: any;
   
 
   constructor(public firestoreDao: FirebaseDBService,
@@ -189,31 +190,33 @@ export class SurveyComponent implements OnInit {
     console.log(event);
   }
 
+
+  removeBookFromSurvey(event: any, bookSelected: any){
+    this.booksToShow.splice(this.booksToShow.indexOf(bookSelected),1)
+    this.firestoreDao.removeBookFromSurvey(bookSelected);
+ 
+  }
+
   async loadBooksForSurvey(){
     const dbDocument = await this.firestoreDao.getSurveyData();
     var dataFromDb =dbDocument.docs[0].data();
-    var myMemberInfo;
-    console.log(dataFromDb.memberInfo[0].userId);
+
     for(var memberIterator = 0; memberIterator < dataFromDb.memberInfo.length; memberIterator++)
     {
       if(dataFromDb.memberInfo[memberIterator].userId == firebase.auth().currentUser.uid)
       {
-        myMemberInfo = dataFromDb.memberInfo[memberIterator];
+        this.myMemberInfo = dataFromDb.memberInfo[memberIterator];
       }
     }
-
-    console.log(dataFromDb);
-    console.log(dataFromDb.books);
     
     for(var index = 0; index < dataFromDb.books.length; index++)
     {
       var promotingUser = dataFromDb.books[index].promotingUser;
-      console.log("promoting user " +promotingUser)
       var bookData = await this.booksearchService.searchForBookById(dataFromDb.books[index].id).toPromise()
       this.booksToShow.push({
           "bookData": bookData,
           "nominatingUser": promotingUser,
-          "myMemberInfo" : myMemberInfo,
+          "myMemberInfo" : this.myMemberInfo.email,
           "memberInfo": dataFromDb.memberInfo
       })
     }  

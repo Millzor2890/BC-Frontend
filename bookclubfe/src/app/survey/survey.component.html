@@ -1,4 +1,4 @@
-<div *ngIf="book.myMemberInfo.hasVoted">
+<div *ngIf="myMemberInfo?.hasVoted">
   <p>You have already voted.  You cannot vote again in this survey!</p>
 </div>
 <div *ngIf="booksToShow">
@@ -13,9 +13,9 @@
         <a (click)="selectFirstChoice($event, book)" class="button first-choice is-success">First Choice</a>
         <a (click)="selectSecondChoice($event, book)" class="button second-choice is-link">Second Choice</a>
         <a (click)="selectThirdChoice($event, book)" class="button third-choice is-info">Third Choice</a>
+        <a *ngIf="book.myMemberInfo == book.nominatingUser" (click)="removeBookFromSurvey($event, book)" class="button third-choice is-danger">Remove Book</a>
       </li>
     </ul>
-
 </div>
 <div>
   <h1>Submit your vote!</h1>
