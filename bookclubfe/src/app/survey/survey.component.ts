@@ -194,7 +194,6 @@ export class SurveyComponent implements OnInit {
   removeBookFromSurvey(event: any, bookSelected: any){
     this.booksToShow.splice(this.booksToShow.indexOf(bookSelected),1)
     this.firestoreDao.removeBookFromSurvey(bookSelected);
- 
   }
 
   async loadBooksForSurvey(){
@@ -211,6 +210,7 @@ export class SurveyComponent implements OnInit {
     
     for(var index = 0; index < dataFromDb.books.length; index++)
     {
+      console.log(bookData)
       var promotingUser = dataFromDb.books[index].promotingUser;
       var bookData = await this.booksearchService.searchForBookById(dataFromDb.books[index].id).toPromise()
       this.booksToShow.push({

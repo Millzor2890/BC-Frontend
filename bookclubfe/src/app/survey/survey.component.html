@@ -9,12 +9,25 @@
         <h3>Author: {{book.bookData.volumeInfo.authors[0]}}</h3>
         <h3>ID: {{book.bookData.id}}</h3>
         <img [src]="book.bookData.volumeInfo.imageLinks.smallThumbnail"/>
+        <br/>
+        <a [attr.href]="book.bookData.saleInfo.buyLink" >Buy this book here</a>
         <h3>Nominating User: {{book.nominatingUser}}</h3>
         <a (click)="selectFirstChoice($event, book)" class="button first-choice is-success">First Choice</a>
         <a (click)="selectSecondChoice($event, book)" class="button second-choice is-link">Second Choice</a>
         <a (click)="selectThirdChoice($event, book)" class="button third-choice is-info">Third Choice</a>
         <a *ngIf="book.myMemberInfo == book.nominatingUser" (click)="removeBookFromSurvey($event, book)" class="button third-choice is-danger">Remove Book</a>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       </li>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
     </ul>
 </div>
 <div>
