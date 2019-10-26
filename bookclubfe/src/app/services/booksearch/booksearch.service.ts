@@ -33,6 +33,9 @@ export class BooksearchService {
 
 
   searchForBookById(bookId: string){
-    return this.http.get(this.apiUrl + "/" +bookId);
+    var params: HttpParams =  new HttpParams()
+    .set('key', firebase_config.firebase.apiKey)
+
+    return this.http.get(this.apiUrl + "/" +bookId, {params});
   }
 }
