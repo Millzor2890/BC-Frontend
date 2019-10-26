@@ -15,8 +15,8 @@ export class SurveyComponent implements OnInit {
   private firstChoiceBook: any;
   private secondChoiceBook: any;
   private thirdChoiceBook: any;
-  private voteSubmitError: any;
-  private myMemberInfo: any;
+  public voteSubmitError: any;
+  public myMemberInfo: any;
   
 
   constructor(public firestoreDao: FirebaseDBService,

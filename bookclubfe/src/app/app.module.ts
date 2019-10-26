@@ -27,6 +27,7 @@ import { BooksearchService } from './services/booksearch/booksearch.service';
 import {AuthGuard} from './services/security/auth.guard';
 import { BookshelfComponent } from './bookshelf/bookshelf.component';
 import { SurveyComponent } from './survey/survey.component';
+import { SurveyResultsComponent } from './survey-results/survey-results.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { SurveyComponent } from './survey/survey.component';
     HomeComponentComponent,
     RegisterComponent,
     BookshelfComponent,
-    SurveyComponent
+    SurveyComponent,
+    SurveyResultsComponent
   ],
   imports: [
     BrowserModule,

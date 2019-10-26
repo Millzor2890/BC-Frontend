@@ -8,6 +8,7 @@ import { Routes } from '@angular/router';
 import { BooksearchComponent } from './booksearch/booksearch.component';
 import { BookshelfComponent } from './bookshelf/bookshelf.component';
 import { SurveyComponent } from './survey/survey.component';
+import { SurveyResultsComponent } from './survey-results/survey-results.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import {RegisterComponent} from './register/register.component';
@@ -19,6 +20,7 @@ export const rootRouterConfig: Routes = [
     { path: 'booksearch', component: BooksearchComponent, canActivate: [AuthGuard]},
     { path: 'bookshelf', component: BookshelfComponent, canActivate: [AuthGuard]},
     { path: 'survey', component: SurveyComponent, canActivate: [AuthGuard]},
+    { path: 'surveyResults', component: SurveyResultsComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponentComponent },
     { path: 'register', component: RegisterComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
