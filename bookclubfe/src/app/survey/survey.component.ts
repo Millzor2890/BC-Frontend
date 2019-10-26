@@ -38,19 +38,26 @@ export class SurveyComponent implements OnInit {
     this.loadBooksForSurvey();
   }
   submitVote(event: any){
-    if(this.firstChoiceBook == null){
-      this.voteSubmitError = "Please select a book as your first choice vote!"
-    }
-    else if(this.secondChoiceBook == null){
-      this.voteSubmitError = "Please select a book as your second choice vote!"
-    }
-    else if(this.thirdChoiceBook == null){
-      this.voteSubmitError = "Please select a book as your third choice vote!"
+    if(this.myMemberInfo.hasVoted == true)
+    {
+      this.voteSubmitError = "You have already voted you silly billy.  You cant vote twice!"
     }
     else{
-      this.firestoreDao.submitVoteBooks(this.firstChoiceBook, this.secondChoiceBook, this.thirdChoiceBook)
-      //this.router.navigate(['/home'])
+      if(this.firstChoiceBook == null){
+        this.voteSubmitError = "Please select a book as your first choice vote!"
+      }
+      else if(this.secondChoiceBook == null){
+        this.voteSubmitError = "Please select a book as your second choice vote!"
+      }
+      else if(this.thirdChoiceBook == null){
+        this.voteSubmitError = "Please select a book as your third choice vote!"
+      }
+      else{
+        this.firestoreDao.submitVoteBooks(this.firstChoiceBook, this.secondChoiceBook, this.thirdChoiceBook)
+        //this.router.navigate(['/home'])
+      }
     }
+
   }
 
 
