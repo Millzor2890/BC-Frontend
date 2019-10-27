@@ -14,112 +14,116 @@ export class FirebaseDBService {
     this.db = firebase.firestore();
   }
 
-  submitVoteBooks(first: any, second: any, third: any)
+ submitVoteBooks(first: any, second: any, third: any)
   {
-    this.db.collection("Surveys").where( "members", "array-contains",  firebase.auth().currentUser.uid).get()
-    .then((querySnapshot) => {
-      //console.log(querySnapshot)
-      var newBookshelf = new Array;
-      var data = querySnapshot.docs[0].data();
-      for(var i = 0; i < data.books.length; i++){
-        if(first.bookData.id == data.books[i].id){
-          var newvoteslist = new Array;
-          for(var j = 0; j < data.books[i].votes.length; j++){
-            newvoteslist.push(data.books[i].votes[j])
-          }
+    var promise = new Promise((resolve, reject) => {
+      this.db.collection("Surveys").where( "members", "array-contains",  firebase.auth().currentUser.uid).get()
+      .then((querySnapshot) => {
+        //console.log(querySnapshot)
+        var newBookshelf = new Array;
+        var data = querySnapshot.docs[0].data();
+        for(var i = 0; i < data.books.length; i++){
+          if(first.bookData.id == data.books[i].id){
+            var newvoteslist = new Array;
+            for(var j = 0; j < data.books[i].votes.length; j++){
+              newvoteslist.push(data.books[i].votes[j])
+            }
 
-          newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 3000})
-          newBookshelf.push({
-            currentScore: 0,
-            id: data.books[i].id,
-            promotingUser: data.books[i].promotingUser,
-            votes : newvoteslist
+            newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 3000})
+            newBookshelf.push({
+              currentScore: 0,
+              id: data.books[i].id,
+              promotingUser: data.books[i].promotingUser,
+              votes : newvoteslist
+            }
+            
+            )
           }
-          
-          )
-        }
-        else if(second.bookData.id == data.books[i].id)
-        {
-          var newvoteslist = new Array;
-          for(var j = 0; j < data.books[i].votes.length; j++){
-            newvoteslist.push(data.books[i].votes[j])
-          }
-
-          newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 2000})
-          newBookshelf.push({
-            currentScore: 0,
-            id: data.books[i].id,
-            promotingUser: data.books[i].promotingUser,
-            votes : newvoteslist
-          }
-          
-          )
-
-        }
-        else if(third.bookData.id == data.books[i].id)
-        {
-          var newvoteslist = new Array;
-          for(var j = 0; j < data.books[i].votes.length; j++){
-            newvoteslist.push(data.books[i].votes[j])
-          }
-
-          newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 1000})
-          newBookshelf.push({
-            currentScore: 0,
-            id: data.books[i].id,
-            promotingUser: data.books[i].promotingUser,
-            votes : newvoteslist
-          }
-          
-          )
-
-        }
-        else{
-          newBookshelf.push({
-            currentScore: 0,
-            id: data.books[i].id,
-            promotingUser: data.books[i].promotingUser,
-            votes : data.books[i].votes
-          })
-
-          }
-        }
-        var newMemberInfo = new Array;
-        for(var k = 0; k < data.memberInfo.length; k++){
-          if(data.memberInfo[k].userId == firebase.auth().currentUser.uid)
+          else if(second.bookData.id == data.books[i].id)
           {
-            newMemberInfo.push({
-              hasVoted: true,
-              userId: firebase.auth().currentUser.uid
-            })
+            var newvoteslist = new Array;
+            for(var j = 0; j < data.books[i].votes.length; j++){
+              newvoteslist.push(data.books[i].votes[j])
+            }
+
+            newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 2000})
+            newBookshelf.push({
+              currentScore: 0,
+              id: data.books[i].id,
+              promotingUser: data.books[i].promotingUser,
+              votes : newvoteslist
+            }
+            
+            )
+
+          }
+          else if(third.bookData.id == data.books[i].id)
+          {
+            var newvoteslist = new Array;
+            for(var j = 0; j < data.books[i].votes.length; j++){
+              newvoteslist.push(data.books[i].votes[j])
+            }
+
+            newvoteslist.push({userid: firebase.auth().currentUser.uid, score: 1000})
+            newBookshelf.push({
+              currentScore: 0,
+              id: data.books[i].id,
+              promotingUser: data.books[i].promotingUser,
+              votes : newvoteslist
+            }
+            
+            )
+
           }
           else{
-            newMemberInfo.push(data.memberInfo[k])
+            newBookshelf.push({
+              currentScore: 0,
+              id: data.books[i].id,
+              promotingUser: data.books[i].promotingUser,
+              votes : data.books[i].votes
+            })
+
+            }
           }
-        }
+          var newMemberInfo = new Array;
+          for(var k = 0; k < data.memberInfo.length; k++){
+            if(data.memberInfo[k].userId == firebase.auth().currentUser.uid)
+            {
+              newMemberInfo.push({
+                hasVoted: true,
+                userId: firebase.auth().currentUser.uid,
+                email: data.memberInfo[k].email
+              })
+            }
+            else{
+              newMemberInfo.push(data.memberInfo[k])
+            }
+          }
 
 
-        querySnapshot.docs[0].ref.update("books",newBookshelf); 
-        querySnapshot.docs[0].ref.update("memberInfo",newMemberInfo); 
+          var bookUpdate = querySnapshot.docs[0].ref.update("books",newBookshelf); 
+          var memberUpdate =  querySnapshot.docs[0].ref.update("memberInfo",newMemberInfo);
+          
+          Promise.all([bookUpdate,memberUpdate]).then(() =>{
+              console.log("db is up to date");
+              resolve();
+            }
+          )
 
-        //Need to save that the current user has voted and cannot vote again.
+          //Need to save that the current user has voted and cannot vote again.
 
 
 
-      console.log(data);
+        console.log(data);
 
 
-     }).catch((error)=> console.log(error))
+      }).catch((error)=> {console.log(error); reject();})
+      });
+    return promise;
       
   
 }
 
-
-  addVoteToBook(book:any, points: number)
-  {
-
-
-  }
 
 
   addUserToBookclub(){

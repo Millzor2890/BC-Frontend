@@ -37,7 +37,8 @@ export class SurveyComponent implements OnInit {
   ngOnInit() {
     this.loadBooksForSurvey();
   }
-  submitVote(event: any){
+
+  async submitVote(event: any){
     if(this.myMemberInfo.hasVoted == true)
     {
       this.voteSubmitError = "You have already voted you silly billy.  You cant vote twice!"
@@ -53,14 +54,13 @@ export class SurveyComponent implements OnInit {
         this.voteSubmitError = "Please select a book as your third choice vote!"
       }
       else{
-        this.firestoreDao.submitVoteBooks(this.firstChoiceBook, this.secondChoiceBook, this.thirdChoiceBook)
-        //this.router.navigate(['/home'])
+        await this.firestoreDao.submitVoteBooks(this.firstChoiceBook, this.secondChoiceBook, this.thirdChoiceBook)
+        //Needs to wait until after db write happens
+        this.router.navigate(['/surveyResults'])
       }
     }
 
   }
-
-
 
   selectFirstChoice(event: any, bookSelected: any)
   {
@@ -102,9 +102,6 @@ export class SurveyComponent implements OnInit {
     this.render.addClass(event.target,"is-outlined");
     console.log(event);
   }
-
-
-
 
   selectSecondChoice(event: any, bookSelected: any)
   {
