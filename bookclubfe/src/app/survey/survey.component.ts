@@ -216,7 +216,7 @@ export class SurveyComponent implements OnInit {
     {
       console.log(bookData)
       var promotingUser = dataFromDb.books[index].promotingUser;
-      var bookData = await this.booksearchService.searchForBookById(dataFromDb.books[index].id).toPromise()
+      var bookData = await this.booksearchService.searchForBookById(dataFromDb.books[index].id)
       this.booksToShow.push({
           "bookData": bookData,
           "nominatingUser": promotingUser,

@@ -34,11 +34,15 @@ export class BooksearchComponent implements OnInit {
   }
 
 
+  
+
+
   searchForBooks(){
-    this.booksearchService.search(this.booksData).subscribe(
+    this.booksearchService.search(this.booksData).then(
       (data:any) => {
         var bookResultArray = new Array ;
         Array.of(data)[0].items.forEach( book => {
+          
 
           bookResultArray.push(
             {
@@ -48,9 +52,10 @@ export class BooksearchComponent implements OnInit {
           )
         });
         this.bookResults = bookResultArray;
-      },
+      }).catch(
       error => 
       {
+        console.log(error)
         console.log("Api failed");
       }
     );

@@ -36,7 +36,7 @@ export class BookshelfComponent implements OnInit {
 
     for(var index = 0; index < dataFromDb.books.length; index++)
     {
-      this.booksearchService.searchForBookById(dataFromDb.books[index][index].id).toPromise()
+      this.booksearchService.searchForBookById(dataFromDb.books[index][index].id)
       .then((data) => this.booksToShow.push(data))
       .catch((error) => console.log(error));
     }  

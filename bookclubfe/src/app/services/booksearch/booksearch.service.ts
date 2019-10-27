@@ -17,9 +17,19 @@ export class BooksearchService {
 
    }
 
+   convertToHttps(convertMe: any)
+   {
+     var stringifitedRefs = JSON.stringify(convertMe);
+     stringifitedRefs = stringifitedRefs.replace('"http://','"https://');
+     return JSON.parse(stringifitedRefs);
+ 
+   }
+
+   
+
 
   search(searchstring: string)
-  {
+  { 
     var return_data = "api did not work";
 
     searchstring = searchstring.replace(' ', '+');
@@ -28,14 +38,47 @@ export class BooksearchService {
     .set('q', searchstring)
     .set('key', firebase_config.firebase.apiKey)
     .set('maxResults', '10')
-    return this.http.get(this.apiUrl, {params});
+
+    var promise = new Promise((resolve, reject) => {
+
+    this.http.get(this.apiUrl, {params}).toPromise().then((data:any) => {
+      Array.of(data)[0].items.forEach( book => {
+      var imageRefs = book.volumeInfo.imageLinks || null;
+
+      if(imageRefs !== null)
+      {
+        book.volumeInfo.imageLinks = this.convertToHttps(book.volumeInfo.imageLinks);
+      }
+    })
+    resolve(data)
+
+
+    }).catch(error => {console.log(error); reject()})
+  
+    });
+    return promise;
   }
 
 
   searchForBookById(bookId: string){
     var params: HttpParams =  new HttpParams()
     .set('key', firebase_config.firebase.apiKey)
+    var promise = new Promise((resolve, reject) => {
 
-    return this.http.get(this.apiUrl + "/" +bookId, {params});
+        this.http.get(this.apiUrl + "/" +bookId, {params}).toPromise().then((data:any) => {
+        var imageRefs = data.volumeInfo.imageLinks || null;
+
+        if(imageRefs !== null)
+        {
+          data.volumeInfo.imageLinks = this.convertToHttps(data.volumeInfo.imageLinks);
+        }
+
+        resolve(data)
+
+       } ).catch(error => {console.log(error); reject()})
+
+
+    });
+    return promise
   }
 }
