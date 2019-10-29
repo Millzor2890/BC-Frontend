@@ -9,10 +9,9 @@
       <li *ngFor="let book of booksToShow; let i = index;">
         <h3>Title: {{book.bookData.volumeInfo.title}}</h3>
         <h3>Author: {{book.bookData.volumeInfo.authors[0]}}</h3>
-        <h3>ID: {{book.bookData.id}}</h3>
         <img [src]="book.bookData.volumeInfo.imageLinks.smallThumbnail"/>
         <br/>
-        <a [attr.href]="book.bookData.saleInfo.buyLink" >More Info here</a>
+        <a [attr.href]="book.bookData.volumeInfo.infoLink" target="_blank" >More Info here</a>
         <h3>Nominating User: {{book.nominatingUser}}</h3>
         <h2>Score: {{book.voteScore}}</h2>
         <br/>
