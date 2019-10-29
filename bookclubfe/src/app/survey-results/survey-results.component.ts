@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';import { FirebaseDBService } from '../services/dao/firebase-db.service';
 import { BooksearchService } from '../services/booksearch/booksearch.service';
+import {Router} from "@angular/router";
 import * as firebase from 'firebase';
 
 @Component({
@@ -14,6 +15,8 @@ export class SurveyResultsComponent implements OnInit {
 
   constructor(public firestoreDao: FirebaseDBService,
     public booksearchService: BooksearchService,
+    private router: Router
+
     ) {
 
       this.booksToShow = new Array;
@@ -24,6 +27,7 @@ export class SurveyResultsComponent implements OnInit {
     }
 
 
+    
 
   async loadBooksForSurvey(){
     const dbDocument = await this.firestoreDao.getSurveyData();
@@ -37,9 +41,12 @@ export class SurveyResultsComponent implements OnInit {
       }
     }
     
+    if(!this.myMemberInfo.hasVoted){
+      this.router.navigate(['/survey']);
+    }
+    
     for(var index = 0; index < dataFromDb.books.length; index++)
     {
-      console.log(bookData)
       var promotingUser = dataFromDb.books[index].promotingUser;
       var votesToSumUp =dataFromDb.books[index].votes;
       var voteTotal = 0;
@@ -47,7 +54,6 @@ export class SurveyResultsComponent implements OnInit {
       {
         voteTotal+=votesToSumUp[0].score
       }
-      console.log("votescore" + voteTotal)
 
       var bookData = await this.booksearchService.searchForBookById(dataFromDb.books[index].id)
       this.booksToShow.push({

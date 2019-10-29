@@ -211,6 +211,11 @@ export class SurveyComponent implements OnInit {
         this.myMemberInfo = dataFromDb.memberInfo[memberIterator];
       }
     }
+
+    if(this.myMemberInfo.hasVoted){
+      this.router.navigate(['/surveyResults']);
+
+    }
     
     for(var index = 0; index < dataFromDb.books.length; index++)
     {
