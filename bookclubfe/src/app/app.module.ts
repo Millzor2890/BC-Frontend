@@ -28,6 +28,7 @@ import {AuthGuard} from './services/security/auth.guard';
 import { BookshelfComponent } from './bookshelf/bookshelf.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyResultsComponent } from './survey-results/survey-results.component';
+import { NavComponent } from './nav/nav.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { SurveyResultsComponent } from './survey-results/survey-results.componen
     RegisterComponent,
     BookshelfComponent,
     SurveyComponent,
-    SurveyResultsComponent
+    SurveyResultsComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

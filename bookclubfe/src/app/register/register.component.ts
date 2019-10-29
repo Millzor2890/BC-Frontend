@@ -47,6 +47,7 @@ export class RegisterComponent implements OnInit {
       this.errorMessage = "";
       this.successMessage = "Your account has been created";
       this.firestoreDao.addUserToBookclub();
+      this.router.navigate(['/bookshelf']);
     }, err => {
       console.log(err);
       this.errorMessage = err.message;

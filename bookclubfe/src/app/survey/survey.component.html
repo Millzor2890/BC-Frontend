@@ -1,3 +1,5 @@
+<app-nav></app-nav>
+
 <div *ngIf="myMemberInfo?.hasVoted">
   <p>You have already voted.  You cannot vote again in this survey!</p>
 </div>
@@ -10,11 +12,11 @@
         <h3>ID: {{book.bookData.id}}</h3>
         <img [src]="book.bookData.volumeInfo.imageLinks.smallThumbnail"/>
         <br/>
-        <a [attr.href]="book.bookData.saleInfo.buyLink" >Buy this book here</a>
+        <a [attr.href]="book.bookData.saleInfo.buyLink" >More Info here</a>
         <h3>Nominating User: {{book.nominatingUser}}</h3>
-        <a (click)="selectFirstChoice($event, book)" class="button first-choice is-success">First Choice</a>
-        <a (click)="selectSecondChoice($event, book)" class="button second-choice is-link">Second Choice</a>
-        <a (click)="selectThirdChoice($event, book)" class="button third-choice is-info">Third Choice</a>
+        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectFirstChoice($event, book)" class="button first-choice is-success">First Choice</a>
+        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectSecondChoice($event, book)" class="button second-choice is-link">Second Choice</a>
+        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectThirdChoice($event, book)" class="button third-choice is-info">Third Choice</a>
         <a *ngIf="book.myMemberInfo == book.nominatingUser" (click)="removeBookFromSurvey($event, book)" class="button third-choice is-danger">Remove Book</a>
         <br/>
         <br/>
