@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {firebase_config} from '../../../configs/firebase.config';
+import { Cacheable, PCacheable } from 'ngx-cacheable';
 
 
 @Injectable()
@@ -59,26 +60,32 @@ export class BooksearchService {
     return promise;
   }
 
+    @PCacheable({
+      maxCacheCount: 20,
+      maxAge: 600000,
+    })
+    searchForBookById(bookId: string){
+      var params: HttpParams =  new HttpParams()
+      .set('key', firebase_config.firebase.apiKey)
+      var promise = new Promise((resolve, reject) => {
 
-  searchForBookById(bookId: string){
-    var params: HttpParams =  new HttpParams()
-    .set('key', firebase_config.firebase.apiKey)
-    var promise = new Promise((resolve, reject) => {
+          this.http.get(this.apiUrl + "/" +bookId, {params}).toPromise().then((data:any) => {
+          var imageRefs = data.volumeInfo.imageLinks || null;
 
-        this.http.get(this.apiUrl + "/" +bookId, {params}).toPromise().then((data:any) => {
-        var imageRefs = data.volumeInfo.imageLinks || null;
+          if(imageRefs !== null)
+          {
+            data.volumeInfo.imageLinks = this.convertToHttps(data.volumeInfo.imageLinks);
+          }
 
-        if(imageRefs !== null)
-        {
-          data.volumeInfo.imageLinks = this.convertToHttps(data.volumeInfo.imageLinks);
-        }
+          resolve(data)
 
-        resolve(data)
-
-       } ).catch(error => {console.log(error); reject()})
+        } ).catch(error => {console.log(error); reject()})
 
 
-    });
-    return promise
-  }
+      });
+      return promise
+    }
+
+
+
 }
