@@ -46,7 +46,10 @@ export class BookshelfComponent implements OnInit {
 
   removeFromBookshelf(event: any,book: any)
   {
+    this.booksToShow.splice(this.booksToShow.indexOf(book),1)
+
     this.firestoreDao.removeBookFromShelf(book);
+
     //find a way to refresh the page or update view model.
   }
 

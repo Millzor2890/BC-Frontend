@@ -60,10 +60,6 @@ export class BooksearchService {
     return promise;
   }
 
-    @PCacheable({
-      maxCacheCount: 20,
-      maxAge: 600000,
-    })
     searchForBookById(bookId: string){
       var params: HttpParams =  new HttpParams()
       .set('key', firebase_config.firebase.apiKey)
