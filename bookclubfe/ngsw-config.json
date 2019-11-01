@@ -1,5 +1,19 @@
 {
   "index": "/index.html",
+  "dataGroups": [
+    {
+      "name": "api-responses",
+      "urls": [
+        "https://www.googleapis.com/books/v1/volumes/**"
+
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "10d"
+      }
+
+    }],
   "assetGroups": [
     {
       "name": "app",
