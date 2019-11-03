@@ -13,9 +13,9 @@
         <br/>
         <a [attr.href]="book.bookData.volumeInfo.infoLink"   target="_blank">More Info here</a>
         <h3>Nominating User: {{book.nominatingUser}}</h3>
-        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectFirstChoice($event, book)" class="button first-choice is-success">First Choice</a>
-        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectSecondChoice($event, book)" class="button second-choice is-link">Second Choice</a>
-        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectThirdChoice($event, book)" class="button third-choice is-info">Third Choice</a>
+        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectFirstChoice($event, book)"  class="button first-choice is-success">First Choice</a>
+        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectSecondChoice($event, book)"  class="button second-choice is-link">Second Choice</a>
+        <a *ngIf="book.myMemberInfo != book.nominatingUser" (click)="selectThirdChoice($event, book)"   class="button third-choice is-info">Third Choice</a>
         <a *ngIf="book.myMemberInfo == book.nominatingUser" (click)="removeBookFromSurvey($event, book)" class="button third-choice is-danger">Remove Book</a>
         <br/>
         <br/>

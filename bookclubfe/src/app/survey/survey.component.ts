@@ -70,11 +70,11 @@ export class SurveyComponent implements OnInit {
       {
         //remove selected secondChoice
         this.secondChoiceBook = null;
-        let secondTag = this.el.nativeElement.getElementsByClassName('second-choice is-outlined');
+        let secondTag = this.el.nativeElement.getElementsByClassName('second-choice no-hover');
         if(secondTag.length > 0)
         {
             for (var i = 0; i < secondTag.length; i++) {
-              this.render.removeClass(secondTag[i],"is-outlined");        }
+              this.render.removeClass(secondTag[i],"no-hover");        }
         }
 
       }
@@ -84,22 +84,23 @@ export class SurveyComponent implements OnInit {
       {
         //remove selected thirdChoice
         this.thirdChoiceBook =null;
-        let thirdTag = this.el.nativeElement.getElementsByClassName('third-choice is-outlined');
+        let thirdTag = this.el.nativeElement.getElementsByClassName('third-choice no-hover');
         if(thirdTag.length > 0)
         {
             for (var i = 0; i < thirdTag.length; i++) {
-              this.render.removeClass(thirdTag[i],"is-outlined");        }
+              this.render.removeClass(thirdTag[i],"no-hover");        }
         }
       }
     }
-    let myTag = this.el.nativeElement.getElementsByClassName('first-choice is-outlined');
+    let myTag = this.el.nativeElement.getElementsByClassName('first-choice no-hover');
 
     if(myTag.length > 0)
     {
         for (var i = 0; i < myTag.length; i++) {
-          this.render.removeClass(myTag[i],"is-outlined");        }
+          this.render.removeClass(myTag[i],"no-hover");        }
     }
-    this.render.addClass(event.target,"is-outlined");
+    //this.render.addClass(event.target,"no-hover");
+    this.render.addClass(event.target,"no-hover");
     console.log(event);
   }
 
@@ -111,11 +112,11 @@ export class SurveyComponent implements OnInit {
       {
         //remove selected secondChoice
         this.firstChoiceBook = null;
-        let firstTag = this.el.nativeElement.getElementsByClassName('first-choice is-outlined');
+        let firstTag = this.el.nativeElement.getElementsByClassName('first-choice no-hover');
         if(firstTag.length > 0)
         {
             for (var i = 0; i < firstTag.length; i++) {
-              this.render.removeClass(firstTag[i],"is-outlined");        }
+              this.render.removeClass(firstTag[i],"no-hover");        }
         }
 
       }
@@ -126,25 +127,25 @@ export class SurveyComponent implements OnInit {
         //remove selected thirdChoice
         this.thirdChoiceBook = null;
 
-        let thirdTag = this.el.nativeElement.getElementsByClassName('third-choice is-outlined');
+        let thirdTag = this.el.nativeElement.getElementsByClassName('third-choice no-hover');
         if(thirdTag.length > 0)
         {
             for (var i = 0; i < thirdTag.length; i++) {
-              this.render.removeClass(thirdTag[i],"is-outlined");        }
+              this.render.removeClass(thirdTag[i],"no-hover");        }
         }
       }
     }
-    let myTag = this.el.nativeElement.getElementsByClassName('second-choice is-outlined');
+    let myTag = this.el.nativeElement.getElementsByClassName('second-choice no-hover');
     console.log("second choice");
     console.log(myTag);
     if(myTag.length > 0)
     {
       for (var i = 0; i < myTag.length; i++) {
-        this.render.removeClass(myTag[i],"is-outlined");   
+        this.render.removeClass(myTag[i],"no-hover");   
       } 
       
     }
-    this.render.addClass(event.target,"is-outlined");
+    this.render.addClass(event.target,"no-hover");
     console.log(event);
   }
 
@@ -157,11 +158,11 @@ export class SurveyComponent implements OnInit {
         //remove selected secondChoice
         this.secondChoiceBook = null;
 
-        let secondTag = this.el.nativeElement.getElementsByClassName('second-choice is-outlined');
+        let secondTag = this.el.nativeElement.getElementsByClassName('second-choice no-hover');
         if(secondTag.length > 0)
         {
             for (var i = 0; i < secondTag.length; i++) {
-              this.render.removeClass(secondTag[i],"is-outlined");        }
+              this.render.removeClass(secondTag[i],"no-hover");        }
         }
 
       }
@@ -172,25 +173,25 @@ export class SurveyComponent implements OnInit {
         //remove selected firstChoice
         this.firstChoiceBook = null;
 
-        let thirdTag = this.el.nativeElement.getElementsByClassName('first-choice is-outlined');
+        let thirdTag = this.el.nativeElement.getElementsByClassName('first-choice no-hover');
         if(thirdTag.length > 0)
         {
             for (var i = 0; i < thirdTag.length; i++) {
-              this.render.removeClass(thirdTag[i],"is-outlined");        }
+              this.render.removeClass(thirdTag[i],"no-hover");        }
         }
       }
     }
-    let myTag = this.el.nativeElement.getElementsByClassName('third-choice is-outlined');
+    let myTag = this.el.nativeElement.getElementsByClassName('third-choice no-hover');
     console.log("third choice");
     console.log(myTag);
     if(myTag.length > 0)
     {
       for (var i = 0; i < myTag.length; i++) {
-        this.render.removeClass(myTag[i],"is-outlined");   
+        this.render.removeClass(myTag[i],"no-hover");   
       } 
       
     }
-    this.render.addClass(event.target,"is-outlined");
+    this.render.addClass(event.target,"no-hover");
     console.log(event);
   }
 
