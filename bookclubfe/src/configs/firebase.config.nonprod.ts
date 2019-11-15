@@ -3,11 +3,11 @@
 export const firebase_config = {
     production: false,
     firebase: {
-        apiKey: "API KEY HERE",
-        authDomain: " AUTH DOMAIN HERE",
-        databaseURL: "DATABASE URL HERE",
-        projectId: "PROJET ID HERE",
-        storageBucket: "STORAGE BUCKET HERE",
+        apiKey: "AIzaSyCTjXO_JAftwa-kU-JF7dMCw0M4-fK6Uo0",
+        authDomain: "wgasa-app.firebaseapp.com",
+        databaseURL: "https://wgasa-app.firebaseio.com",
+        projectId: "wgasa-app",
+        storageBucket: "wgasa-app.appspot.com",
         messagingSenderId: "MESSAGING SENDER ID HERE"
       }
   };
