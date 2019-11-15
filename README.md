@@ -8,20 +8,23 @@ To run locally:
 
 npm start
 
+Contribution Guide: 
+https://github.com/Millzor2890/BC-Frontend/blob/master/bookclubfe/ContributionGuide.md
+
 
 Reminders:
 PWA service worker is only enabled after a prod build
 
 TODO: 
-1. Get license for this
-2. Find and amazon API I can use to get 
+1. ~~Get license for this~~
+2. ~~Find and amazon API I can use to get ~~
 	a. Title
 	b. Author
 	c. book image
 	d. Ideally this would be a lamda function in firebase I could text a book title or isbn number to.
 3. Style this bitch
-4. Adding a voting functionality
-5. Add user auth
+4. ~~Adding a voting functionality~~
+5. ~~Add user auth~~
 6. IMplement user blog sections for book reports.
-7.  Implement saved books 
+7.  ~~Implement saved books ~~
 8.  Implement a book reccomendation form

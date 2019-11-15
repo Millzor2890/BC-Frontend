@@ -1,4 +1,6 @@
-# Getting an API Key for local development: 
+# Developer Contribution Guide:  
+
+## Getting an API Key for local development: 
 
 1.  I have setup non-prod credentials: in src/configs/firebase.config.nonprod.ts
 
