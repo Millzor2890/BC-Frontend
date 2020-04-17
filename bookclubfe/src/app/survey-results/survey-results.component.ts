@@ -52,7 +52,7 @@ export class SurveyResultsComponent implements OnInit {
       var voteTotal = 0;
       for(var voteIndex=0; voteIndex < votesToSumUp.length; voteIndex++)
       {
-        voteTotal+=votesToSumUp[0].score
+        voteTotal+=votesToSumUp[voteIndex].score
       }
 
       var bookData = await this.booksearchService.searchForBookById(dataFromDb.books[index].id)
