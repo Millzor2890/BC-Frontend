@@ -45,4 +45,4 @@ testem.log
 Thumbs.db
 
 #Firebase config
-src/configs/firebase.config.ts
+src/configs/*
