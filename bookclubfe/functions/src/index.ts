@@ -10,7 +10,7 @@ var qs = require('qs');
 
 const https = require('https');
 
-const yourWebHookURL = 'https://hooks.slack.com/services/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'; 
+const yourWebHookURL = firebase_config.firebase.slackWebhookURL; 
 //states
 const MS_FR = "WaitForFriendlyReminder";
 const MS_AM = "WaitForActualMeeting";
@@ -86,9 +86,8 @@ async function setNextMeetingTimeRequest(request, response){
         response.send("Gotcha ill set the next book club meeting for: " + newDate.toLocaleDateString());
         var timestamp = newDate.getTime();
 
-        db.collection("Larry-Tracker").get()
+        await db.collection("Larry-Tracker").get()
         .then(function(querySnapshot){
-            var data = querySnapshot.docs[0].data();
             var newMeetingTime = timestamp;
             var data4db = {
                 NextBookClubMeeting: newMeetingTime,
@@ -96,7 +95,12 @@ async function setNextMeetingTimeRequest(request, response){
             }
             querySnapshot.docs[0].ref.set(data4db);
         });
-        //sendSlackMessage(yourWebHookURL, datetimePicker)
+        var slackString = 'The next book club meeting is set for:  ' + new Date(timestamp).toLocaleDateString() + 
+        ' ' + formatAMPM(new Date(timestamp)) + ' CST'
+
+        sendSlackMessage(yourWebHookURL,{
+            'text': slackString, // text
+          } )
     }
     else{
         response.send("This request is not valid")
