@@ -89,9 +89,14 @@ async function setNextMeetingTimeRequest(request, response){
         await db.collection("Larry-Tracker").get()
         .then(function(querySnapshot){
             var newMeetingTime = timestamp;
+            var data = querySnapshot.docs[0].data();
+
             var data4db = {
                 NextBookClubMeeting: newMeetingTime,
-                meetingStatus : MS_FR
+                meetingStatus : MS_FR,
+                votingStatus : data.votingStatus,
+                nextSubmissionCheck : data.nextSubmissionCheck,
+                nextVoteCheck:  data.nextVoteCheck
             }
             querySnapshot.docs[0].ref.set(data4db);
         });
