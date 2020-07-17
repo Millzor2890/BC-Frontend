@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksearchService } from '../services/booksearch/booksearch.service';
 import { FirebaseDBService } from '../services/dao/firebase-db.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as firebase from 'firebase'
 
 
@@ -14,7 +15,8 @@ export class BookshelfComponent implements OnInit {
 
   constructor(
     public booksearchService: BooksearchService,
-    public firestoreDao: FirebaseDBService
+    public firestoreDao: FirebaseDBService,
+    private _snackBar: MatSnackBar
   ) {
     this.booksToShow = new Array;
 
@@ -23,6 +25,12 @@ export class BookshelfComponent implements OnInit {
   ngOnInit() {
     this.loadBooksOnShelf();
 
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   async loadBooksOnShelf(){
@@ -49,14 +57,14 @@ export class BookshelfComponent implements OnInit {
     this.booksToShow.splice(this.booksToShow.indexOf(book),1)
 
     this.firestoreDao.removeBookFromShelf(book);
+    this.openSnackBar("Removed from bookshelf", "Close");
+
 
     //find a way to refresh the page or update view model.
   }
 
   promoteToSurvey(event: any,book: any){
-    console.log("trying to add to survey");
     this.firestoreDao.promoteBookToSurvey(book);
-    console.log("finished adding to survey");
-
+    this.openSnackBar("Added To survey", "Close");
   }
 }

@@ -29,6 +29,9 @@ import { BookshelfComponent } from './bookshelf/bookshelf.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyResultsComponent } from './survey-results/survey-results.component';
 import { NavComponent } from './nav/nav.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -52,6 +55,8 @@ import { NavComponent } from './nav/nav.component';
     AngularFireModule.initializeApp(firebase_config.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    BrowserAnimationsModule, 
+    MatSnackBarModule
   ],
   providers: [AuthService,BooksearchService, AuthGuard],
   bootstrap: [AppComponent]
