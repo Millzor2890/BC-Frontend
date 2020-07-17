@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksearchService } from '../services/booksearch/booksearch.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import * as firebase from 'firebase'
 
 @Component({
@@ -19,7 +21,9 @@ export class BooksearchComponent implements OnInit {
 
   //TODO: Add API Service
   constructor(
-    public booksearchService: BooksearchService
+    public booksearchService: BooksearchService,
+    private _snackBar: MatSnackBar
+
   ) {
     this.db = firebase.firestore();
     this.query="";
@@ -33,7 +37,14 @@ export class BooksearchComponent implements OnInit {
     this.booksData = event.target.value
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
 
+    });
+  }
   
 
 
@@ -86,7 +97,7 @@ saveToBookshelf(event: any,book: any)
         console.log("success")
         console.log(event);
         
-        book.transactionStatus = "Added your first book to your bookshelf"
+        book.transactionStatus = "Added your first book to your bookshelf";
 
         //doNothing
       }).catch(function(error)
@@ -94,6 +105,7 @@ saveToBookshelf(event: any,book: any)
         console.log("failure");
         console.log(event);
         book.transactionStatus = "Failed to add book to your bookshelf"
+
 
         //DoNothing
       })
@@ -115,6 +127,7 @@ saveToBookshelf(event: any,book: any)
            
             }
         })
+
     });
     }
       
@@ -130,7 +143,8 @@ saveToBookshelf(event: any,book: any)
       console.log(error);
 
   });
-  
+  this.openSnackBar("Added book to your bookshelf", "Close");
+
   
   
   

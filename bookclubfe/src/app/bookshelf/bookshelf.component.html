@@ -18,11 +18,14 @@
         <h3>Title: {{book.volumeInfo.title}}</h3>
         <h3>Author: {{book.volumeInfo.authors[0]}}</h3>
         <img [src]="book.volumeInfo.imageLinks.smallThumbnail"/>
+        <br>
         <a (click)="removeFromBookshelf($event, book)" class="button is-danger">Remove</a>
         <a (click)="promoteToSurvey($event, book)" class="button is-info">Nominate for Next Bookclub</a>
 
-        
+        <hr/>
+        <br/>
       </li>
+      
     </ul>
 
 </div>
