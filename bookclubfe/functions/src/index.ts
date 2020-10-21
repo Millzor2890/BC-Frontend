@@ -239,7 +239,8 @@ async function HourlyCron(context){
                     //
                 var waitADayForMoreSubmissionsForSlack = '<!here> 5 people have submitted books so far! '+
                 'I\'ll open up voting in the next 24 hours '+
-                'so if you haven\`t submitted books yet please do so in the next 24 hours! Thank you!';
+                'so if you haven\`t submitted books yet please do so in the next 24 hours! Thank you!' +
+                ' https://wgasa-app.firebaseapp.com/bookshelf';
 
                 sendSlackMessage(yourWebHookURL,{
                     'text': waitADayForMoreSubmissionsForSlack, // text
@@ -265,7 +266,7 @@ async function HourlyCron(context){
                 //send slack message
                     //
                 var waitTwoDaysForMoreSubmissionsForSlack = '<!here> Friendly reminder to submit books for the next '+
-                'book club if you havent done so already! ';
+                'book club if you havent done so already! https://wgasa-app.firebaseapp.com/bookshelf';
 
                 sendSlackMessage(yourWebHookURL,{
                     'text': waitTwoDaysForMoreSubmissionsForSlack, // text
@@ -291,7 +292,8 @@ async function HourlyCron(context){
                     });
                 //send slack message
                     //
-                var openVotingForSlack = '<!here> Voting is now open. Please go vote for our next book when you get a chance! ';
+                var openVotingForSlack = '<!here> Voting is now open. Please go vote for our next book when you get a chance! ' +
+                 'https://wgasa-app.firebaseapp.com/survey';
 
                 sendSlackMessage(yourWebHookURL,{
                     'text': openVotingForSlack, // text
@@ -322,7 +324,8 @@ async function HourlyCron(context){
                     //
                 var waitADayForMoreVotesForSlack = '<!here> 5 people have voted so far! '+
                 'I\'ll pick the winner in the next 24 hours '+
-                'so if you haven\`t voted yet please do so in the next 24 hours! Thank you!';
+                'so if you haven\`t voted yet please do so in the next 24 hours! Thank you!' + 
+                ' https://wgasa-app.firebaseapp.com/survey';
 
                 sendSlackMessage(yourWebHookURL,{
                     'text': waitADayForMoreVotesForSlack, // text
@@ -348,7 +351,7 @@ async function HourlyCron(context){
                 //send slack message
                     //
                 var waitTwoDaysForMoreVotesForSlack = '<!here> Friendly reminder to vote for books for the next '+
-                'book club if you havent done so already! ';
+                'book club if you havent done so already! https://wgasa-app.firebaseapp.com/survey';
 
                 sendSlackMessage(yourWebHookURL,{
                     'text': waitTwoDaysForMoreVotesForSlack, // text
